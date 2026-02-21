@@ -18,6 +18,24 @@ services:
       timeout: 5s
       retries: 5
 
+  backend:
+    build:
+      context: ./backend
+      dockerfile: Dockerfile
+    container_name: url_shortener-backend
+    environment:
+      DATABASE_URL: postgres://postgres:postgres@postgres:5432/url_shortener
+      PORT: 3001
+      BASE_URL: http://localhost:3001
+    ports:
+      - "3001:3001"
+    depends_on:
+      postgres:
+        condition: service_healthy
+    volumes:
+      - ./backend:/app
+      - /app/node_modules
+
 
 volumes:
   postgres_data:
