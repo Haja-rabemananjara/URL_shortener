@@ -14,9 +14,10 @@ services:
       - postgres_data:/var/lib/postgresql/data
     healthcheck:
       test: ["CMD-SHELL", "pg_isready -U postgres"]
-      interval: 5s
+      interval: 10s
       timeout: 5s
       retries: 5
+      start_period: 30s
 
   backend:
     build:
@@ -24,7 +25,7 @@ services:
       dockerfile: Dockerfile
     container_name: url_shortener-backend
     environment:
-      DATABASE_URL: postgres://postgres:postgres@postgres:5432/url_shortener
+      DATABASE_URL: postgresql://postgres:postgres@postgres:5432/url_shortener
       PORT: 3001
       BASE_URL: http://localhost:3001
     ports:
@@ -32,10 +33,21 @@ services:
     depends_on:
       postgres:
         condition: service_healthy
-    volumes:
-      - ./backend:/app
-      - /app/node_modules
+    restart: unless-stopped
+    
 
+  frontend:
+    build:
+      context: ./frontend
+      dockerfile: Dockerfile
+    container_name: url-shortener-frontend
+    environment:
+      NEXT_PUBLIC_API_URL: http://localhost:3001
+    ports:
+      - '3000:3000'
+    depends_on:
+      - backend
+    restart: unless-stopped
 
 volumes:
   postgres_data:
