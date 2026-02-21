@@ -29,7 +29,7 @@ url-shortener/
 │   │   ├── schema.prisma
 │   │   └── migrations/
 │   └── test/         # Tests e2e (Supertest)
-├── frontend/         # Next.js 14 + Tailwind CSS
+├── frontend/         # Next.js  + Tailwind CSS
 │   └── src/
 │       ├── app/      # App Router (page.tsx, layout.tsx)
 │       ├── components/  # ShortenForm, UrlCard, StatsBar
@@ -49,7 +49,7 @@ url-shortener/
 
 ```bash
 # 1. Cloner le repo
-git clone <your-repo-url>
+git clone git@github.com:Haja-rabemananjara/URL_shortener.git
 cd url-shortener
 
 # 2. Copier les variables d'environnement
