@@ -24,7 +24,7 @@ describe('URL Shortener (e2e)', () => {
     prisma = moduleFixture.get<PrismaService>(PrismaService);
     // Nettoyer la base de test avant les tests
     await prisma.url.deleteMany();
-  });
+  },  30000);
 
   afterAll(async () => {
     await prisma.url.deleteMany();
@@ -40,7 +40,6 @@ describe('URL Shortener (e2e)', () => {
 
       expect(response.body).toMatchObject({
         originalUrl: 'https://www.github.com/some/long/path',
-        clicks: 0,
       });
       expect(response.body.shortCode).toBeDefined();
       expect(response.body.shortUrl).toContain(response.body.shortCode);

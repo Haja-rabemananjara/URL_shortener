@@ -26,7 +26,7 @@ describe('UrlsController', () => {
     it('devrait créer et retourner une URL raccourcie', async () => {
       const dto = { originalUrl: 'https://example.com' };
       const response = {
-        id: 'clx123',
+        id: '1',
         originalUrl: 'https://example.com',
         shortCode: 'abc123',
         shortUrl: 'http://localhost:3001/abc123',

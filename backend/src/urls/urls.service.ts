@@ -6,7 +6,7 @@ import { CreateUrlDto } from './dto/create-url.dto';
 /* eslint-disable prettier/prettier */
 import { ConflictException, Injectable, NotFoundException } from '@nestjs/common';
 import { Url } from '@prisma/client';
-import { PrismaService } from 'src/prisma/prisma.service';
+import { PrismaService } from '../prisma/prisma.service';
 import { UrlResponseDto } from './dto/url-response.dto';
 import { nanoid } from 'nanoid';
 
